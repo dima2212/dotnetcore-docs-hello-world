@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:6.0
+FROM mcr.microsoft.com/dotnet/sdk:6.0 as build
 
 WORKDIR /source
 # Copy everything in this project and build app
@@ -7,7 +7,7 @@ WORKDIR /source/dotnetcore-docs-hello-world
 RUN dotnet publish -c release -o /app 
 # final stage/image
 # We're using a tag that is explicitly a Windows container
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 as runtime
 
 WORKDIR /app
 COPY --from=build /app ./
