@@ -29,10 +29,10 @@ metadata:
  labels:
   app: demo
 spec:
- ports:
- - port: 9999
- protocol: TCP
- targetPort: 80
- selector:
-  app: demo
- type: ClusterI
+  ports:
+  - port: 9999
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: myapp
+  type: ClusterIP
