@@ -13,7 +13,7 @@ spec:
         app: {{ .Values.container.name }}
     spec:
       containers:
-      - name: {{ .Values.container.name }}
+      - name: {{ .Values.container.name }}-container
         image: {{ .Values.container.image }}
         imagePullPolicy: Never
         resources:
@@ -28,7 +28,7 @@ kind: Service
 metadata:
  name: {{ .Values.container.name }}-service
  labels:
-  app: demo
+  app: {{ .Values.container.name }}
 spec:
   ports:
   - port: 9999
@@ -36,4 +36,4 @@ spec:
     targetPort: {{ .Values.container.port }}
   selector:
     app: {{ .Values.container.name }}
-  type: NodeBalancer
+  type: LoadBalancer

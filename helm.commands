@@ -1,0 +1,2 @@
+helm install demo .\k8s\myapp\
+helm list
