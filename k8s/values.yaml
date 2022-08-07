@@ -1,0 +1,7 @@
+environment: development
+container:
+  name: demo
+  port: 80
+  image: myhello
+  tag: myapp
+replicas: 1

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.container.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.container.name }}
+    replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.container.name }}
+    spec:
+      containers:
+      - name: {{ .Values.container.name }}
+        image: {{ .Values.container.image }}
+        imagePullPolicy: Never
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: {{ .Values.container.port }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: {{ .Values.container.name }}-service
+ labels:
+  app: demo
+spec:
+  ports:
+  - port: 9999
+    protocol: TCP
+    targetPort: {{ .Values.container.port }}
+  selector:
+    app: {{ .Values.container.name }}
+  type: NodeBalancer
