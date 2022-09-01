@@ -2,6 +2,6 @@ environment: development
 container:
   name: myapp
   port: 80
-  image: myhello
+  image: myapp
   tag: myapp
   replicas: 1
